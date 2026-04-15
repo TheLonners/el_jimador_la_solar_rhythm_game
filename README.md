@@ -66,8 +66,8 @@ http://localhost:8000
 1. Abre `index.html`
 2. Haz clic en **Abrir setup 2 pantallas**
 3. Se abrirán:
-   - una ventana `?screen=floor`
-   - una ventana `?screen=wall`
+   - una ventana `?screen=floor` + las session - esta sale en el launcher
+   - una ventana `?screen=wall` + las session - esta sale en el launcher
 4. Desde el launcher puedes:
    - iniciar ronda
    - reiniciar
@@ -82,26 +82,27 @@ http://localhost:8000
 
 ### Player 1
 - Teclado: `A S D`
-- Mouse / touch: click o toque sobre el pad correspondiente
+- Mouse / touch: click o toque sobre el pad correspondiente - `funciona a medias`
 
 ### Player 2
 - Teclado: `J K L`
-- Mouse / touch: click o toque sobre el pad correspondiente
+- Mouse / touch: click o toque sobre el pad correspondiente - `funciona a medias`
 
 ### Start / restart
 - `SPACE` inicia una nueva ronda desde la pantalla de piso
-- desde el launcher también puedes iniciarla
+- desde el launcher también puedes iniciarla - `Ya no funciona`
 
 ## MP3 reactivo
 
-El launcher permite seleccionar un archivo MP3 local.
+El launcher permite seleccionar un archivo MP3 local. `Ya funciona`
 
 Qué hace:
 
-- carga el audio en la pantalla de piso
-- analiza energía / picos del track
-- genera un chart de notas reactivo a la música
-- usa la duración del track como duración real de la ronda
+- carga el audio en la pantalla de piso ✅
+- analiza energía / picos del track ✅
+- genera un chart de notas reactivo a la música  `funciona a medias`
+- usa la duración del track como duración real de la ronda ✅ se puede limitar
+  
 
 ### Nota
 El chart es **generado automáticamente** a partir del audio. No es un beatmap manual frame-perfect, pero sí es bastante más coherente que una lluvia aleatoria de notas.
@@ -110,34 +111,34 @@ El chart es **generado automáticamente** a partir del audio. No es un beatmap m
 
 ## Modo sensor / LidarTouch M1 - EXPERIMENTAL - ALPHA - SE USO TABLET COMO RECURSO "TOUCH"
 
-El punto de integración queda listo en `js/floor-screen.js`.
+El punto de integración queda listo en `js/floor-screen.js`. ✅
 
 ### Hook principal expuesto
 ```js
-window.LidarTouchBridge.hit(player, lane)
+window.LidarTouchBridge.hit(player, lane) ✅
 ```
 
 Ejemplo:
 ```js
-window.LidarTouchBridge.hit(1, 0); // Player 1, lane 0
-window.LidarTouchBridge.hit(2, 2); // Player 2, lane 2
+window.LidarTouchBridge.hit(1, 0); // Player 1, lane 0 ✅
+window.LidarTouchBridge.hit(2, 2); // Player 2, lane 2 ❌❓
 ```
 
 ### Evento alternativo soportado
 ```js
 window.dispatchEvent(new CustomEvent("lidar-hit", {
   detail: { player: 1, lane: 2 }
-}));
+})); ❌✅❓
 ```
 
 ### Calibración visual
 ```js
-window.LidarTouchBridge.setCalibrationMode(true)
+window.LidarTouchBridge.setCalibrationMode(true) ❌✅❓
 ```
 
 ### Ajuste simple de zonas
 ```js
-window.LidarTouchBridge.configureZones({
+window.LidarTouchBridge.configureZones({ ❌❓
   centerGap: 1.05,
   padHeight: 1.1,
   safeTop: 1,
@@ -148,10 +149,10 @@ window.LidarTouchBridge.configureZones({
 ## Dónde adaptar la entrada real del sensor
 
 ### Archivo
-`js/floor-screen.js`
+`js/floor-screen.js` ✅
 
 ### Puntos clave
-- método `externalHit(player, lane)`
+- método `externalHit(player, lane)` 
 - listener del evento `"lidar-hit"`
 - objeto global `window.LidarTouchBridge`
 - overlay de calibración y layout de carriles en `getLaneLayout()`
@@ -160,17 +161,17 @@ window.LidarTouchBridge.configureZones({
 
 La sincronización usa:
 
-- `postMessage` entre ventanas abiertas desde el launcher
-- `BroadcastChannel` como respaldo cuando el navegador lo permite
+- `postMessage` entre ventanas abiertas desde el launcher ✅
+- `BroadcastChannel` como respaldo cuando el navegador lo permite ✅
 
 Esto permite montar el juego localmente sin servidor complejo ni middleware adicional.
 
 ## Assets destacados
 
-- `assets/backgrounds/start_screen_full.png`
-- `assets/backgrounds/results_screen_full.png`
-- `assets/backgrounds/floor_gameplay_bg.png`
-- `assets/backgrounds/wall_gameplay_bg.png`
+- `assets/backgrounds/start_screen_full.png` ✅
+- `assets/backgrounds/results_screen_full.png` ✅
+- `assets/backgrounds/floor_gameplay_bg.png` ✅
+- `assets/backgrounds/wall_gameplay_bg.png` ✅
 
 ## Archivos fuente incluidos
 
