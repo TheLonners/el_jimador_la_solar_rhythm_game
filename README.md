@@ -1,6 +1,6 @@
 # El Jimador x La Solar — Rhythm Game HTML5
 
-Proyecto HTML5 tipo **Guitar Hero / rhythm game** para instalación física de evento, desarrollado a partir del arte entregado en PDF / AI.
+Proyecto HTML5 **rhythm game** para instalación física de evento.
 
 Ahora incluye una versión más aterrizada para instalación real:
 
@@ -106,7 +106,9 @@ Qué hace:
 ### Nota
 El chart es **generado automáticamente** a partir del audio. No es un beatmap manual frame-perfect, pero sí es bastante más coherente que una lluvia aleatoria de notas.
 
-## Modo sensor / LidarTouch M1
+
+
+## Modo sensor / LidarTouch M1 - EXPERIMENTAL - ALPHA - SE USO TABLET COMO RECURSO "TOUCH"
 
 El punto de integración queda listo en `js/floor-screen.js`.
 
