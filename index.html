@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>El Jimador x La Solar — Rhythm Game</title>
+  <link rel="stylesheet" href="./css/styles.css" />
+</head>
+<body>
+  <div id="app">
+    <section id="operator-screen" class="screen operator hidden">
+      <div class="operator-shell">
+        <div class="brand-row">
+          <img src="./assets/logos/el_jimador_logo.png" alt="El Jimador" class="brand-logo brand-logo-jimador" />
+          <img src="./assets/logos/la_solar_logo.png" alt="La Solar" class="brand-logo brand-logo-solar" />
+        </div>
+
+        <div class="operator-grid">
+          <div class="panel panel-hero">
+            <div class="eyebrow">Instalación 2 pantallas · piso + pared</div>
+            <h1>Launcher operador</h1>
+            <p>
+              Controla la instalación, carga un MP3 local para generar notas reactivas,
+              cambia entre mouse y sensor, y activa calibración visual para zonas de pie.
+            </p>
+            <div class="button-row">
+              <button id="open-setup" class="btn btn-primary">Abrir setup 2 pantallas</button>
+              <button id="open-floor" class="btn">Abrir piso</button>
+              <button id="open-wall" class="btn">Abrir pared</button>
+            </div>
+            <div class="button-row">
+              <button id="start-game" class="btn btn-accent">Iniciar ronda</button>
+              <button id="restart-game" class="btn">Reiniciar</button>
+              <button id="toggle-audio" class="btn">Audio FX: ON</button>
+            </div>
+            <div class="button-row">
+              <button id="toggle-calibration" class="btn">Calibración: OFF</button>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-title">Entrada</div>
+            <label class="input-mode">
+              <span>Modo activo</span>
+              <select id="input-mode">
+                <option value="mouse">Mouse / touch test</option>
+                <option value="sensor">LidarTouch M1 / sensor</option>
+              </select>
+            </label>
+            <div class="tiny-note">
+              El layout del piso está optimizado para interacción con pies: carriles anchos,
+              pads grandes y tolerancia más amplia en la zona de impacto.
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-title">Track MP3</div>
+            <label class="file-picker">
+              <span>Seleccionar MP3 local</span>
+              <input id="track-file" type="file" accept="audio/mpeg,audio/mp3,audio/*" />
+            </label>
+            <div class="status-list compact-list">
+              <div class="status-item"><span>Archivo</span><strong id="track-name">Sin cargar</strong></div>
+              <div class="status-item"><span>Estado</span><strong id="track-status">Demo interno</strong></div>
+              <div class="status-item"><span>Sync piso</span><strong id="track-sync">Pendiente</strong></div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-title">Estado live</div>
+            <div class="status-list">
+              <div class="status-item"><span>Floor</span><strong id="floor-status">No conectado</strong></div>
+              <div class="status-item"><span>Wall</span><strong id="wall-status">No conectado</strong></div>
+              <div class="status-item"><span>Sesión</span><strong id="session-label">—</strong></div>
+              <div class="status-item"><span>Fase</span><strong id="phase-label">Idle</strong></div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-title">Marcador</div>
+            <div class="score-preview">
+              <div class="score-card">
+                <span>1P</span>
+                <strong id="preview-p1">0</strong>
+              </div>
+              <div class="score-card">
+                <span>2P</span>
+                <strong id="preview-p2">0</strong>
+              </div>
+            </div>
+            <div class="tiny-note" id="leader-note">Esperando partida…</div>
+          </div>
+
+          <div class="panel panel-wide">
+            <div class="panel-title">Atajos</div>
+            <div class="keys-grid">
+              <div><strong>P1</strong> A · S · D</div>
+              <div><strong>P2</strong> J · K · L</div>
+              <div><strong>Start</strong> Space / click</div>
+              <div><strong>Sensor</strong> window.LidarTouchBridge.hit(player, lane)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <canvas id="floor-canvas" class="screen-canvas hidden"></canvas>
+    <canvas id="wall-canvas" class="screen-canvas hidden"></canvas>
+  </div>
+
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>
